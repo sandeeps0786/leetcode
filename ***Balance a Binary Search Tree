@@ -1,0 +1,42 @@
+ given a tree make it bst 
+ 
+   first convert it into sorted array ;
+   then make bst from it;
+ 
+ void arr(TreeNode* root,vector<int>&s)
+    {
+        if(root==0)
+            return ;
+        
+        s.push_back(root->val);
+        
+        arr(root->left,s);
+        arr(root->right,s);
+    }
+    TreeNode* buildbst(vector<int>&s,int l,int h)
+    {
+           if(l>h)
+               return NULL;
+        
+           int mid=(h+l)/2;
+           
+         TreeNode *temp=new TreeNode(s[mid]);
+        
+          temp->left=buildbst(s,l,mid-1);
+           temp->right=buildbst(s,mid+1,h);
+        
+        return temp;
+           
+    }
+    
+    TreeNode* balanceBST(TreeNode* root) {
+        
+        vector<int>s;
+        arr(root,s);
+        sort(s.begin(),s.end());
+        
+       return buildbst(s,0,s.size()-1);
+        
+        
+        
+    }
