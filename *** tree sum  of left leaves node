@@ -1,0 +1,39 @@
+Share
+Given the root of a binary tree, return the sum of all left leaves.
+
+ 
+
+Example 1:
+
+
+Input: root = [3,9,20,null,null,15,7]
+Output: 24
+Explanation: There are two left leaves in the binary tree, with values 9 and 15 respectively.
+
+
+
+ void h(TreeNode* root,int &ans)
+    {
+         if(root==0)
+             return;
+        
+      
+        
+      if(root->left){                                                 // if root of left present h   to left of left check karenge kya wo leaf to nhi h;
+          
+          if(root->left->left==0&&root->left->right==0)
+              ans+=root->left->val;
+            h(root->left,ans);
+      }
+          
+        
+   
+         if(root->right)
+            h(root->right,ans);
+        
+    }
+    int sumOfLeftLeaves(TreeNode* root) {
+        int ans=0;
+        h(root,ans);
+        return ans;
+    }
