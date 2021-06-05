@@ -29,3 +29,17 @@ my mistake using kadane algo but not thinking that  sum =1  nums[i] =4   then al
         }
         return ans;
     }
+
+***************************dp sonlution
+
+int n = A.length;
+        int[] dp = new int[n];//dp[i] means the maximum subarray ending with A[i];
+        dp[0] = A[0];
+        int max = dp[0];
+        
+        for(int i = 1; i < n; i++){
+            dp[i] = A[i] + (dp[i - 1] > 0 ? dp[i - 1] : 0);               if the sum<0 then we do tis
+            max = Math.max(max, dp[i]);
+        }
+        
+        return max;
