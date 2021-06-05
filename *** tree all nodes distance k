@@ -1,0 +1,93 @@
+// tree;
+
+for up 
+we use previously sotored node in array b as a blocker because 
+we dont want to get these values multilple timel
+
+
+///////////////////***********************************************///////////////////
+
+ bool rton(TreeNode *root,TreeNode* target,vector<TreeNode*>&b)                // funtion return the root to node;
+    {
+         if(root==0)
+              return false;
+        
+          if(root==target)                         
+          {    
+               b.push_back(root);
+                 return true;
+          }
+        
+        bool a=rton(root->left,target,b);
+        if(a)
+        {
+            b.push_back(root);
+            return true;
+        }
+        
+         bool c=rton(root->right,target,b);
+        if(c)
+        {
+            b.push_back(root);
+            return true;
+        }
+        
+        return false;
+          
+          
+        
+    }
+    void drop(TreeNode *root,int k,vector<int>&a)              // drop easy one;
+    {
+        if(root==0)
+            return ;
+        
+         if(k==0)
+         {
+             a.push_back(root->val);
+         }
+         
+             
+       drop(root->left,k-1,a);
+       drop(root->right,k-1,a);
+            
+    }
+    void block(TreeNode *root,int k,vector<int>&a,TreeNode* blocker)                / blocker easy one;
+    {
+        if(root==0)
+            return ;
+        
+         if(root==blocker)
+         {
+             return;
+         }
+        
+        if(k==0)
+        {
+            a.push_back(root->val);
+             return ;
+        }
+         
+             
+       block(root->left,k-1,a,blocker);
+       block(root->right,k-1,a,blocker);
+            
+    }
+    
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        vector<int>a;
+        drop(target,k,a);
+        
+        vector<TreeNode*>b;
+        rton(root,target,b);
+           
+           for(int i=1;i<b.size();i++)                                   // this thing has turn the table b[i-1] will work as blocker because we 
+           {
+                                                                       //doont need to go again on that side 
+                block(b[i],k-i,a,b[i-1]);
+           }
+        
+        return a;
+        
+        
+    }
