@@ -1,0 +1,33 @@
+we need to count the number of jump to reach the laast index;
+
+
+
+    int jump(vector<int>& nums) {
+        
+        
+        if(nums.size()==1)                   // if size == 1 return 0;
+            return 0;
+        
+        
+    int nextjump=0,maxjump=nums[0],jump=0;
+        
+           for(int i=0;i<nums.size();i++)
+           {
+               maxjump=max(maxjump,nums[i]+i);                                 // first how far he can jump;
+               
+               if(nextjump==i)                                                 // if maxjump == i then we will go for further process;;
+               {
+                   jump++;
+                  
+                   if(maxjump>=nums.size()-1)
+                       return jump;
+                   
+                   nextjump=maxjump;
+                   
+               }
+           }
+        
+                                                                // else return 0;
+          return 0;
+          
+    }
