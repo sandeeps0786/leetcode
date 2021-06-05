@@ -1,0 +1,26 @@
+Input: root = [1,2,2,3,4,4,3]
+Output: true
+
+   root1 - left    ==  root2->right; must vice versa;
+   
+   
+   ***************************************
+   bool h(TreeNode *root1,TreeNode *root2)
+    {
+        if(!root1&&!root2)
+            return true;
+        
+         if(!root1&&root2||!root2&&root1)                         // this is case we should always take it in a consideration
+             return false;
+       
+        if(root1->val!=root2->val)
+            return false;
+        
+        return h(root1->left,root2->right)&&h(root1->right,root2->left);
+            
+    }
+    bool isSymmetric(TreeNode* root) {
+        
+        return h(root->left,root->right);
+        
+    }
