@@ -1,0 +1,44 @@
+
+trick use c!=1 once it gets executed then dont come inside it;
+
+
+
+
+
+
+
+int ans=0,c=0;
+    void h(TreeNode* root,int &k)   // &k bbecause when recursion goes back the k value in not modified;
+    {
+        if(root==0)
+            return ;
+        
+        
+        
+            h(root->left,k);   // 
+          
+           k--;             // we use this as a reference because k must be modified at every level;
+        if(k==0&&c!=1)
+        {
+            ans=root->val;
+            c=1;
+            return ;
+        }
+           
+        
+         h(root->right,k);
+      
+           
+        
+    }
+    int kthSmallest(TreeNode* root, int k) {
+         
+        h(root,k);
+        
+        return ans;
+          
+      
+         
+             
+        
+    }
