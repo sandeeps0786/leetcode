@@ -17,7 +17,7 @@ my mistake using kadane algo but not thinking that  sum =1  nums[i] =4   then al
         
         for(int i=1;i<nums.size();i++)
         {
-            if(sum<nums[i]&&sum<0)                       // sum<0 then it will exchange other wise leave it
+            if(sum<0)                       // sum<0 then it will exchange other wise leave it  or you can add sum<nums[i] also
             {
                
                 sum=0;
