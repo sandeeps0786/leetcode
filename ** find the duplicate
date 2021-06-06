@@ -1,0 +1,24 @@
+marked it visited if you have visited that element;
+
+int findDuplicate(vector<int>& nums) {
+        
+        int n=nums.size();
+        int a[100005];
+        memset(a,0,sizeof(a));
+        
+        for(int i=0;i<nums.size();i++)
+        {
+            if(a[nums[i]]<0)
+            {
+                return nums[i];
+                
+            }
+            
+            a[nums[i]]=-1;
+        }
+        
+        return 0;
+        
+        
+        
+    }
