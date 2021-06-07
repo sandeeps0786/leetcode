@@ -1,0 +1,19 @@
+trick is pen and paper  
+     
+      bottom to top at every coloumn index ;
+      
+      3  6  9
+      2  5 8
+      1  4 7
+      
+      like that traversal
+   for(int i=0;i<row;i++)
+              {
+                  for(int j=0;j<col;j++)
+                  {
+                      temp1[i][j]=temp[col-j-1][i];
+                      
+                  }
+                  cout<<endl;
+              }
+            
