@@ -1,0 +1,26 @@
+   vector<int>time;
+        
+        for(int i=0;i<dist.size();i++)
+        {
+             int x=dist[i]/speed[i];               // first store the time;
+              
+              if(dist[i]%speed[i]!=0)
+                    x++;
+            
+          
+            
+              time.push_back(x);
+         
+         }
+        
+        sort(time.begin(),time.end());           // sort according with time;
+        
+
+        
+        for(int i=0;i<time.size();i++)
+        {
+              if(time[i]==i)
+                  return i;
+         }
+        
+        return dist.size();
