@@ -1,0 +1,63 @@
+map<char,vector<char>>m;
+       int mod=1e9+7;
+   int h(int n,char parent,vector<vector<long long int>> &dp,int i)
+    {
+        if(i>=n)
+            return 0;
+       
+       
+       
+        if(i==n-1)
+        {
+             
+            if(parent=='a')
+                return 1;
+           else if(parent=='e')
+                return 2;
+            else if(parent=='i')
+                 return 4;
+            else if(parent=='o')
+                 return 2;
+           else  if(parent=='u')
+               return 1;
+            
+            else
+                return 5;
+          }
+        
+         if(dp[parent-'a'][i]!=-1)
+          return dp[parent-'a'][i];
+         
+       long long  ans=0;
+        for(char s:m[parent])
+        {     
+           
+          ans+=(h(n,s,dp,i+1)%mod);
+            
+          }
+        
+        return dp[parent-'a'][i]=ans%mod;
+        
+        
+     }
+    int countVowelPermutation(int n) {
+        
+    
+     
+        m['b']={'a','e','i','o','u'};
+        
+        m['a']={'e'};
+        m['e']={'a','i'};
+        m['i']={'a','e','o','u'};
+        m['o']={'i','u'};
+        m['u']={'a'};
+        
+        
+        vector<vector<long long int>>dp(30,vector<long long int>(n+2,-1));
+        
+        return h(n,'b',dp,0)%mod;
+        
+        
+    
+        
+    }
