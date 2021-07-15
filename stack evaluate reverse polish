@@ -1,0 +1,66 @@
+Input: tokens = ["4","13","5","/","+"]
+Output: 6
+Explanation: (4 + (13 / 5)) = 6
+Example 3:
+
+Input: tokens = ["10","6","9","3","+","-11","*","/","*","17","+","5","+"]
+Output: 22
+Explanation: ((10 * (6 / ((9 + 3) * -11))) + 17) + 5
+= ((10 * (6 / (12 * -11))) + 17) + 5
+= ((10 * (6 / -132)) + 17) + 5
+= ((10 * 0) + 17) + 5
+= (0 + 17) + 5
+= 17 + 5
+= 22
+
+
+int evalRPN(vector<string>& s) {
+        stack<int>st;
+        
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]=="*"||s[i]=="-"||s[i]=="/"||s[i]=="+")
+            {
+                int t=st.top();
+                st.pop();
+                int u=st.top();
+                st.pop();
+                
+                if(s[i]=="-")
+                {
+                    st.push(u-t);
+                }
+                else if(s[i]=="*")
+                {
+                    st.push(t*u);
+                }
+                else if(s[i]=="/")
+                {
+                    st.push(u/t);
+                }
+                else
+                    st.push(u+t);
+            }
+            else
+            {
+                int num=0;
+                if(s[i][0]=='-')
+                {
+                    for(int j=1;j<s[i].length();j++)
+                {
+                    num=num*10+(s[i][j]-'0');
+                }
+                    st.push(-num);
+                }
+                else
+                {   for(int j=0;j<s[i].length();j++)
+                {
+                    num=num*10+(s[i][j]-'0');
+                }
+                st.push(num);
+               }
+                
+            }
+        }
+        
+        return st.top();
