@@ -1,0 +1,53 @@
+
+        stack<int>s;
+        vector<int>v;
+        v.clear();
+   
+        
+        for(int i=0;i<a.size();i++)
+        {
+            if(a[i]>0||s.size()==0)
+            {
+                s.push(a[i]);
+            }
+            else 
+            {
+                while(true)
+                {
+                    int peek=s.top();
+                    
+                    if(peek<0)
+                    {
+                        s.push(a[i]);break;
+                    }
+                    else if(peek==-a[i])
+                    {
+                        s.pop();
+                        break;
+                    }
+                    else if(peek>-a[i])
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        s.pop();
+                        if(s.size()==0)
+                        {
+                             s.push(a[i]);break;
+                        }
+                    }
+                }
+               }
+            
+            
+        }
+        
+        while(s.size())
+        {
+            v.push_back(s.top());
+            s.pop();
+        }
+        
+        reverse(v.begin(),v.end());
+        return v;
