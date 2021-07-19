@@ -1,0 +1,85 @@
+int ans;
+int dp[202][202];
+bool isvalid(int i,int j,int n,int m)
+{
+    
+     if(i>=0&&j>=0&&i<n&&j<m)
+         return true;
+    
+    return false;
+ }
+int h(int i,int j,int n,int m,vector<vector<int>>& matrix,int step)
+{
+    
+     if(i<0||j<0||i>=n||j>=m)
+         return 0;
+    
+     int r=1,l=1,u=1,d=1;                                   // my mistake was here;
+    
+   
+    
+    if(dp[i][j]!=-1)
+        return dp[i][j];
+    
+    if(isvalid(i+1,j,n,m))
+    {
+        if(matrix[i+1][j]>matrix[i][j])
+        {
+            d=1+h(i+1,j,n,m,matrix,step);
+        }
+    }
+        
+        
+    if(isvalid(i-1,j,n,m))
+    {
+        if(matrix[i-1][j]>matrix[i][j])
+        {
+            u=1+h(i-1,j,n,m,matrix,step);
+        }
+       }
+        
+        if(isvalid(i,j+1,n,m))
+        {
+            if(matrix[i][j+1]>matrix[i][j])
+        {
+            r=1+h(i,j+1,n,m,matrix,step);
+        }
+        }
+            
+            
+            if(isvalid(i,j-1,n,m))
+            {
+                
+                if(matrix[i][j-1]>matrix[i][j])
+        {
+            l=1+h(i,j-1,n,m,matrix,step);
+        }
+            }
+    
+    
+      return dp[i][j]=max(r,max(l,max(u,d)));
+    
+}
+int longestIncreasingPath(vector<vector<int>>& matrix) {
+    
+      int ans=INT_MIN;
+          int n=matrix.size();
+    int m=matrix[0].size();
+    
+    memset(dp,-1,sizeof(dp));
+          
+          for(int i=0;i<n;i++)
+          {
+                for(int j=0;j<m;j++)
+                {
+                  ans=max(ans,h(i,j,n,m,matrix,0));
+                }
+              
+          }
+    
+    
+      
+             
+             
+    return ans;
+}
