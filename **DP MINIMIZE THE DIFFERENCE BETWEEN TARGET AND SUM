@@ -1,0 +1,49 @@
+int dp[5001][71];
+
+    int h(int row,vector<vector<int>>& mat,int target,int n,int sum,int m)
+    {
+          
+         if(row==n)
+         {
+             return abs(sum-target);
+         }
+        
+        if(dp[sum][row]!=-1)
+        {
+            return dp[sum][row];
+            
+        }
+        
+          int mindff=INT_MAX;
+        for(int i=0;i<m;i++)
+        {
+            
+            mindff=min(mindff,h(row+1,mat,target,n,sum+mat[row][i],m));
+            
+        }
+        
+        return dp[sum][row]=mindff;
+           
+           
+        
+    }
+    
+    int minimizeTheDifference(vector<vector<int>>& mat, int target) {
+        
+        int n=mat.size();
+        int m=mat[0].size();
+         int row=0;
+  
+          memset(dp,-1,sizeof(dp));
+     
+        
+             int mindff=INT_MAX;
+        for(int i=0;i<m;i++)
+        {
+            
+            mindff=min(mindff,h(row+1,mat,target,n,mat[row][i],m));
+            
+        }
+        
+        return mindff;
+    }
