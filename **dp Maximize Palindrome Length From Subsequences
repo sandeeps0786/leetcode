@@ -1,0 +1,41 @@
+vector<vector<int>>dp;
+    int ans=0;
+    int h(string &a,int l,int r,int br)
+    {
+        if(l>r)
+            return 0;
+        
+        if(l==r)                     // simple if l==r;
+        {
+            return 1;
+        }
+        if(dp[l][r]!=-1)
+            return dp[l][r];
+        
+        int len=0;
+        if(a[l]==a[r])
+        {
+            len=2+h(a,l+1,r-1,br);
+            
+            if(l<br&&r>=br)
+            {
+                ans=max(ans,len);
+            }
+        }
+        else
+        {
+            len=max(h(a,l+1,r,br),h(a,l,r-1,br));
+        }
+        
+        return dp[l][r]=len;
+    }
+    int longestPalindrome(string word1, string word2) {
+        
+       
+        int n=word1.length()+word2.length();
+        int br=word1.length();
+        string a=word1+word2;
+        dp.assign(a.size(),vector<int>(a.size(),-1));
+        h(a,0,n-1,br);
+        return ans;
+    }
