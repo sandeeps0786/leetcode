@@ -1,0 +1,66 @@
+Input: a?b:c
+Output: a b c
+Explanation:
+string expression = a?b:c
+So the binary tree for the above expression is:
+       a  
+     /   \   
+    b     c
+Example 2:
+
+Input: a?b?c:d:e
+Output: a b c d e
+Explanation:
+string expression =  a?b?c:d:e
+So the binary tree for the above expression is:
+                  a
+                /   \
+               b     e
+             /   \
+             
+             
+             
+
+Node* h(string str,int i,Node* node)
+{
+    
+        Node* newnode=new Node('0');
+        
+    if(i==str.length())
+    {
+        return newnode;
+    }
+
+    if(str[i]=='?')
+    {
+        
+        node->left=h(str,i+1,node);
+     
+        
+    }
+     if(str[i]==':')
+    {
+         node->right=h(str,i+1,node);
+       
+    }
+    if(str[i]>='a'&&str[i]<='z')
+    {
+        newnode->data=str[i];
+        node=newnode;
+        h(str,i+1,node);
+        
+        
+    }
+    
+    return node;
+   
+    
+}
+Node *convertExpression(string str,int i)
+{
+    Node* node=new Node('0');
+    
+    return h(str,0,node);
+    
+        
+}
