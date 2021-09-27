@@ -1,0 +1,149 @@
+If a successor can be replaced by more than one root, replace it with the root that has the shortest length.
+
+
+class Solution {
+public:
+    struct Trienode{ 
+       string word="";                     // making word;
+        int c=0;
+        Trienode *children[26];
+        
+        Trienode()
+        {
+            for(int i=0;i<26;i++)
+                 children[i]=nullptr;
+        }
+        
+    };
+    Trienode* build(vector<string>word)
+    {
+        Trienode* root=new Trienode();
+        
+         for(int i=0;i<word.size();i++)
+         {
+             string temp=word[i];
+             Trienode* curr=root;
+             
+               for(int j=0;j<temp.length();j++)
+               {
+                   
+                    if(curr->children[temp[j]-'a']==nullptr)
+                    {
+                        curr->children[temp[j]-'a']=new Trienode();
+                    }
+                   
+                     
+                  
+                   curr=curr->children[temp[j]-'a'];
+                   
+               }
+             
+              curr->word=temp;
+             curr->c+=1;
+             
+             
+         }
+        
+        return root;
+        
+     }
+   // board[i][j]  make it itself worked as visited array 
+    string search(Trienode* root,string word)
+    {
+          string k="";
+       for(int i=0;i<word.length();i++)
+       {
+           int index=word[i]-'a';
+          
+             if(root->children[index]==nullptr)
+             {
+                 break;
+             }
+            
+           if(root->c>0)
+           {
+             
+               return k;
+           }
+             
+             k.push_back(word[i]);
+           root=root->children[index];
+           
+        
+           
+         }
+            if(root->c==0)
+           {
+              return "";
+            
+           }
+        else
+        {
+        
+                 return k;
+        }
+    
+        
+        
+    }
+   
+    string replaceWords(vector<string>& dictionary, string sentence) {
+         Trienode* root=build(dictionary);
+        
+         
+          vector<string>temp;
+        string k="";
+        
+        for(int i=0;i<sentence.length();i++)
+        {
+            if(sentence[i]==' ')
+            {
+                temp.push_back(k);
+                k="";
+                
+            }
+            else
+            {
+                k.push_back(sentence[i]);
+            }
+        }
+        temp.push_back(k);
+        
+        
+   
+        
+        
+        
+        
+        string ans="";
+        for(int i=0;i<temp.size();i++)
+        {
+            
+             string res=search(root,temp[i]);
+        
+              if(res.size()>0)
+              {
+                     if(i!=0)
+                    ans=ans+" "+res;
+                     else
+                         ans=res;
+                  
+              }
+            else
+            {
+                       if(i!=0)
+                   ans=ans+" "+temp[i];  
+                     else
+                         ans=temp[i];
+            }
+            
+            
+        }
+        
+        return ans;
+        
+        
+         
+        
+    }
+};
