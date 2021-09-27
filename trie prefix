@@ -1,0 +1,104 @@
+class Trie {
+      
+       
+       
+public:
+    struct Trienode{
+       int c=0;
+     
+        
+     Trienode* children[26];
+        
+        Trienode()
+        {
+            
+         for(int i=0;i<26;i++)
+              children[i]=nullptr;
+        
+        
+         }
+      
+    
+     };
+    
+    Trienode* root;
+    Trie() {
+        
+       root=new Trienode();
+        
+    }
+    
+    
+    void insert(string word) {
+        
+        Trienode *curr=root;
+         for(int i=0;i<word.length();i++)
+         {
+             int index=word[i]-'a';
+             
+             if(curr->children[index]==0)
+             {
+                 curr->children[index]=new Trienode();
+             }
+             
+             curr=curr->children[index];
+         }
+        curr->c+=1;
+        
+        
+    }
+    
+    bool search(string word) {
+        
+        Trienode* curr=root;
+         for(int i=0;i<word.length();i++)
+         {
+             int index=word[i]-'a';
+             
+             if(curr->children[index]==0)
+             {
+                 return false;
+             }
+             
+             curr=curr->children[index];
+         }
+       
+        
+        if(curr->c>0)
+        return true;
+        else
+        return false;
+        
+    }
+    
+    bool startsWith(string word) {
+        
+         Trienode* curr=root;
+         for(int i=0;i<word.length();i++)
+         {
+             int index=word[i]-'a';
+             
+             if(curr->children[index]==0)
+             {
+                 return false;
+             }
+             
+             curr=curr->children[index];
+         }
+       
+        if(curr->c>0)                                // important what the the prefix ==word  so no more children   hence we have to take care of one morecase
+        {
+            return true;
+        }
+        
+        for(char i='a';i<='z';i++)
+         if(curr->children[i-'a']!=nullptr)
+         {
+             return true;
+         }
+        
+        return false;
+        
+    }
+};
+
