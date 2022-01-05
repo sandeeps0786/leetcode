@@ -1,0 +1,13 @@
+ 
+ // pair<int,int>  one is snap id and other is intmax     uppper bound pf snap id and if snap id is eiqal than compare to INT_MAX;
+ auto it = upper_bound(m[index].begin(),m[index].end(), pair<int, int>(snap_id, INT_MAX));  
+       
+       
+       
+       return it == m[index].begin() ? 0 : prev(it)->second;
+       
+       
+       if it==null vector the return 0 and else return prev
+       
+       
+       
